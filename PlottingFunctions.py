@@ -17,15 +17,13 @@ def SurfacePlot(x,y,z):
 	plt.show()
 
 def MultiPlot(t, lines):
-
-	ax = plt.axes()
-	for line in lines:
+    ax = plt.axes()
+    for line in lines:
 		ax.plot(t,line)
-	plt.show()
+    plt.show()
 
 def MultiScatter(sets):
-	m = ('x','<')
 	ax = plt.axes()
 	for set in sets:
-		ax.scatter(set[0],set[1],marker = set[2])
+		ax.scatter(map(lambda xx: float(xx), set[0]),map(lambda xx: float(xx), set[1]),marker = set[2])
 	plt.show()
