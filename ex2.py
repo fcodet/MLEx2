@@ -60,9 +60,9 @@ print result_opt
 print 'final cost'
 print cost(np.mat(result_opt).transpose(),X,y)
 thetaf = result_opt
-x1 = map(lambda t: t+0.0,range(0,100, 1))
-x2 = map(lambda t: -1.0 /thetaf[2] * (thetaf[0]+thetaf[1]*t),x1)
-Plot(x1,x2)
+x1 = map(lambda t: np.mat(t+0.0),range(0,100, 1))
+x2 = map(lambda t: np.mat(-1.0 /thetaf[2] * (thetaf[0]+thetaf[1]*t)),x1)
+#Plot(x1,x2)
 #sets.append([x1,x2,'0'])
 sets.append([np.mat(x1),np.mat(x2),'0'])
 MultiScatter(sets)
