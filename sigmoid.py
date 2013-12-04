@@ -9,5 +9,5 @@ def sigmoid(z):
 
     for i in range(0,dim_i):
         for j in range(0,dim_j):
-            g[i,j]= 1.0 / (1.0 + np.exp(z[i,j]))
-    return g
+            g[i,j]= 1.0 / (1.0 + np.exp(-z[i,j]))
+    return float(g)

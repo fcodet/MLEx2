@@ -37,6 +37,7 @@ MultiScatter(sets)
 
 zz = np.mat([[1,2,3],[4,5,6]])
 zz  = np.mat(1)
+zz = np.mat([-723.2])
 gg = sigmoid(zz)
 print gg
 
@@ -46,13 +47,22 @@ initial_theta  = np.zeros((n, 1))
 result_jg = costFunction(initial_theta, X ,y)
 print result_jg
 
-xx = range(-10,10, 1)
-yy = range(-10,10, 1)
-zzz = cost(np.mat([xx,yy]),X,y)
-fig = plt.figure()
-ax = fig.gca(projection='3d')
-xxx, yyy = np.meshgrid(xx, yy)
-ax.plot_surface(xxx,yyy,zzz,rstride=1, cstride=1, cmap=cm.coolwarm, linewidth=0, antialiased=False)
-plt.show()
+#xx = map(lambda t: 0.206+t/25.0,range(-25,25, 1))
+#yy = map(lambda t: 0.201+t/25.0,range(-25,25, 1))
+
+#zz = [0.0]*len(xx)
+#for i in range(0,len(xx)):
+#Plot(xx,zz)
 
 result_opt = optimize.fmin_ncg((lambda theta: cost(theta,X,y)) , initial_theta,(lambda theta: grad(theta,X,y)), maxiter = 400)
+print result_opt
+
+print 'final cost'
+print cost(np.mat(result_opt).transpose(),X,y)
+thetaf = result_opt
+x1 = map(lambda t: t+0.0,range(0,100, 1))
+x2 = map(lambda t: -1.0 /thetaf[2] * (thetaf[0]+thetaf[1]*t),x1)
+Plot(x1,x2)
+#sets.append([x1,x2,'0'])
+sets.append([np.mat(x1),np.mat(x2),'0'])
+MultiScatter(sets)
