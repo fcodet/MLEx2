@@ -6,6 +6,7 @@ from costFunction import *
 import numpy as np
 from scipy import optimize
 from mapFeature import *
+from costFunctionReg import *
 
 print('loading data...')
 data = loadcsv('ex2data2.txt')
@@ -36,6 +37,14 @@ for i in range(0,len(label)):
 sets = [[x0_abs,x0_ord,'o','Microchip 1'],[x1_abs,x1_ord,'+','Microchip 2']]
 MultiScatter(sets)
 
-X = mapFeature(data[:,0],data[:,1])
+X = np.mat(mapFeature(data[:,0],data[:,1]))
 
-print X
+[m, n] = np.shape(X)
+initial_theta  = np.zeros((n, 1))
+lam = 1
+
+result_jg = costFunctionReg(lam, initial_theta, X ,y)
+print result_jg
+
+result_opt = optimize.fmin_ncg((lambda theta: costReg(lam,theta,X,y)) , initial_theta,(lambda theta: gradReg(lam,theta,X,y)), maxiter = 400)
+print result_opt
